@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craft Components - พาร์ทเนอร์แห่งการสร้างสรรค์เบียร์</title>
+    <link rel="icon" href="https://craft.co.th/cdn/shop/files/logocraftcom2_150x.png?v=1614309320" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for Craft Components Rebranding */
+
+        /* Color Palette */
+        :root {
+            --dark-gray: #2c3e50;
+            /* เทาเข้ม */
+            --mustard-yellow: #f39c12;
+            /* เหลืองมัสตาร์ด */
+            --burgundy-red: #e74c3c;
+            /* แดงบอร์โดซ์ */
+            --matte-black: #1a1a1a;
+            /* ดำด้าน */
+            --light-gray: #f8f8f8;
+            /* พื้นหลังอ่อน */
+            --text-color-dark: #333;
+            --text-color-light: #f0f0f0;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Prompt', 'Kanit', sans-serif;
+            color: var(--text-color-dark);
+            line-height: 1.7;
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+            /* Prevent horizontal scroll from animations */
+            scroll-behavior: smooth;
+            /* Smooth scrolling for anchor links */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Kanit', 'Prompt', sans-serif;
+            color: var(--dark-gray);
+            font-weight: 700;
+            /* Bold headings */
+        }
+
+        h1 {
+            font-size: 4.5rem;
+        }
+
+        /* Larger for Hero */
+        h2 {
+            font-size: 3rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        a {
+            color: var(--mustard-yellow);
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--burgundy-red);
+        }
+
+        /* Navbar */
+        #mainNavbar {
+            background-color: rgba(44, 62, 80, 0.95);
+            /* Semi-transparent dark-gray */
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            /* Modern blur effect */
+            -webkit-backdrop-filter: blur(5px);
+            /* For Safari */
+        }
+
+        #mainNavbar.scrolled {
+            background-color: var(--dark-gray);
+            /* Solid dark-gray on scroll */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--mustard-yellow) !important;
+            /* Brand text color */
+        }
+
+        .brand-logo {
+            height: 80px;
+            /* Adjust logo size */
+            margin-right: 10px;
+            /* หากโลโก้เดิมเป็นสีเข้ม ให้ใช้ filter เพื่อเปลี่ยนเป็นสีเหลืองมัสตาร์ด */
+            /* filter: invert(0.9) sepia(1) saturate(5) hue-rotate(30deg) brightness(1.2); */
+        }
+
+        .brand-text {
+            color: var(--mustard-yellow);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-color-light) !important;
+            font-weight: 400;
+            font-size: 1.05rem;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--mustard-yellow) !important;
+            transform: translateY(-2px);
+            /* Slight lift on hover */
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28243, 156, 18, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Hero Section */
+        #hero {
+            background-color: var(--dark-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            filter: brightness(0.6) grayscale(0.2);
+            /* Darken and desaturate image for text readability */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+            z-index: 0;
+        }
+
+        #hero h1 {
+            font-size: 5.5rem;
+            /* Even larger for impact */
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+            line-height: 1.1;
+        }
+
+        #hero p {
+            font-size: 1.6rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Custom Buttons */
+        .custom-btn {
+            background-color: var(--mustard-yellow);
+            border-color: var(--mustard-yellow);
+            color: var(--matte-black);
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .custom-btn:hover {
+            background-color: var(--burgundy-red);
+            border-color: var(--burgundy-red);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-outline-btn {
+            border: 2px solid var(--mustard-yellow);
+            color: var(--mustard-yellow);
+            background-color: transparent;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-outline-btn:hover {
+            background-color: var(--mustard-yellow);
+            color: var(--matte-black);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-link {
+            color: var(--burgundy-red);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .custom-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--mustard-yellow);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .custom-link:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+            /* More generous padding */
+            position: relative;
+            overflow: hidden;
+            /* For animations */
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 80px;
+            /* More space below heading */
+            position: relative;
+            padding-bottom: 25px;
+            color: var(--dark-gray);
+            font-weight: 700;
+            font-size: 3.5rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 100px;
+            /* Thicker underline */
+            height: 5px;
+            background-color: var(--burgundy-red);
+            border-radius: 3px;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #fff;
+        }
+
+        #about img {
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            /* Stronger shadow */
+        }
+
+        #about p.lead {
+            color: var(--dark-gray);
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        #about strong {
+            color: var(--mustard-yellow);
+            font-weight: 600;
+        }
+
+        /* Product Cards */
+        .product-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background-color: #fff;
+            border: none;
+            /* Remove default border */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            /* Initial subtle shadow */
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            /* More prominent shadow on hover */
+        }
+
+        .product-card img {
+            height: 280px;
+            /* Consistent image height */
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+            /* Zoom image on hover */
+        }
+
+        .product-card .card-body {
+            padding: 30px;
+        }
+
+        .product-card .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .product-card .card-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Solutions Section */
+        #solutions {
+            background-color: var(--dark-gray);
+        }
+
+        #solutions h2 {
+            color: #fff;
+        }
+
+        #solutions .icon-box {
+            background-color: rgba(255, 255, 255, 0.08);
+            /* Semi-transparent white for icons */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            padding: 30px;
+        }
+
+        #solutions .icon-box:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        #solutions .icon-box i {
+            color: var(--mustard-yellow);
+            font-size: 3.5rem;
+            /* Larger icons */
+            margin-bottom: 20px;
+        }
+
+        #solutions .icon-box h3 {
+            color: var(--mustard-yellow);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        #solutions .icon-box p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+        }
+
+        .testimonial {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left: 6px solid var(--mustard-yellow);
+            padding: 40px;
+            margin-top: 70px;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial p.fw-bold {
+            color: var(--mustard-yellow);
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        /* Knowledge Section */
+        #knowledge {
+            background-color: var(--light-gray);
+        }
+
+        #knowledge ul li {
+            font-size: 1.1rem;
+            color: var(--text-color-dark);
+            margin-bottom: 10px;
+        }
+
+        #knowledge ul li i {
+            color: var(--mustard-yellow);
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        #knowledge img {
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #fff;
+        }
+
+        .contact-item {
+            border-radius: 15px;
+            background-color: var(--light-gray);
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            padding: 30px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-item i {
+            color: var(--mustard-yellow);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.8rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+
+        .contact-item p a {
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .contact-item p a:hover {
+            color: var(--mustard-yellow);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--matte-black);
+            color: var(--text-color-light);
+            padding: 50px 0;
+        }
+
+        footer .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease-in-out;
+            font-weight: 400;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--mustard-yellow);
+        }
+
+        footer p.small {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        /* Fade in on scroll */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-animate.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section specific animations */
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            /* Larger initial translateY for more impact */
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: var(--delay, 0s);
+            /* Use data-delay for staggered effects */
+        }
+
+        .animate-fade-in-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            /* Larger initial translateX */
+            animation: fadeInLeft 1s ease-out forwards;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .animate-fade-in-right {
+            opacity: 0;
+            transform: translateX(80px);
+            /* Larger initial translateX */
+            animation: fadeInRight 1s ease-out forwards;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            #mainNavbar {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .navbar-collapse {
+                background-color: var(--dark-gray);
+                margin-top: 10px;
+                border-radius: 8px;
+                padding: 10px 0;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 0.8rem 1rem;
+                text-align: center;
+            }
+
+            #hero h1 {
+                font-size: 3.5rem;
+            }
+
+            #hero p {
+                font-size: 1.3rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 50px;
+            }
+
+            .product-card img {
+                height: 220px;
+            }
+
+            .product-card .card-title {
+                font-size: 1.6rem;
+            }
+
+            #about img,
+            #knowledge img {
+                margin-bottom: 40px;
+            }
+
+            .contact-item {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            #hero h1 {
+                font-size: 2.8rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .display-5 {
+                font-size: 2.2rem;
+            }
+
+            .lead {
+                font-size: 1.1rem;
+            }
+
+            .custom-btn,
+            .custom-outline-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .product-card img {
+                height: 180px;
+            }
+
+            .product-card .card-title {
+                font-size: 1.4rem;
+            }
+
+            .product-card .card-text {
+                font-size: 0.9rem;
+            }
+
+            .testimonial {
+                font-size: 1rem;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container-fluid">
+            <a class="navbar-brand animate-fade-in" href="#hero">
+                <img src="https://craft.co.th/cdn/shop/files/Craft_Components_Logo_300x300.png?v=1688644266" alt="Craft Components Logo" class="d-inline-block align-text-top brand-logo">
+                <span class="brand-text">CRAFT COMPONENTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">เกี่ยวกับ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">วัตถุดิบ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solutions">โซลูชั่น</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#knowledge">คลังความรู้</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">ติดต่อ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="d-flex align-items-center justify-content-center text-center vh-100 position-relative">
+        <div class="hero-overlay"></div>
+        <img src="https://scontent.fbkk29-4.fna.fbcdn.net/v/t39.30808-6/491406890_1506864680313754_446361268542722058_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEDvNWriAW5-07aHrwp_gfMudYoW-iPtk251ihb6I-2TS0yZfOUiFqsgS7G2SU9fUfbE76W_1CMHPIx1nAsfZa_&_nc_ohc=52-V1F3MO9wQ7kNvwHA5JQO&_nc_oc=AdlfuOAJMwr85N5CC0xMXsKqwfmyr2kBXPbmcRO1LosfRml3bCn7eYIYDwc6ngATuHI&_nc_zt=23&_nc_ht=scontent.fbkk29-4.fna&_nc_gid=Is61UTJIV5YTMWSuAutVng&oh=00_AfIelslGWzbBbRFME3I7GUxyc7W8rJaWrkpvYdZrbobatQ&oe=6834EDBF" alt="Craft Components Hero" class="hero-bg-image position-absolute w-100 h-100 object-fit-cover">
+        <div class="container position-relative z-index-1 animate-fade-in-up">
+            <h1 class="display-1 text-white fw-bold">สร้างสรรค์เบียร์ในแบบของคุณ</h1>
+            <p class="lead text-white-75 mb-4">พาร์ทเนอร์ผู้เชี่ยวชาญ ที่พร้อมยกระดับทุกหยดคราฟต์</p>
+            <a href="#products" class="btn btn-primary btn-lg custom-btn animate-pulse">สำรวจวัตถุดิบ</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-5 bg-light-subtle section-animate">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0 animate-fade-in-left">
+                    <img src="https://placehold.co/800x600" alt="About Us" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6 animate-fade-in-right">
+                    <h2 class="display-5 fw-bold text-dark-gray mb-4">เรื่องราวของเรา</h2>
+                    <p class="lead text-muted">
+                        Craft Components คือผู้เชี่ยวชาญด้านวัตถุดิบเบียร์คุณภาพสูง เราคือ <strong>พาร์ทเนอร์</strong> ที่สนับสนุนทุกความสร้างสรรค์ในโลกเบียร์คราฟต์
+                    </p>
+                    <p class="text-muted">
+                        เราคัดสรรวัตถุดิบระดับโลกอย่างพิถีพิถัน พร้อมมอบคำแนะนำจากความหลงใหลในเบียร์คราฟต์อย่างแท้จริง
+                    </p>
+                    <a href="#contact" class="btn btn-outline-secondary custom-outline-btn mt-3">ติดต่อเรา</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-5 bg-white section-animate">
+        <div class="container">
+            <h2 class="display-5 fw-bold text-dark-gray text-center mb-5">วัตถุดิบคุณภาพระดับโลก</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 animate-fade-in-up">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="https://placehold.co/600x400" class="card-img-top object-fit-cover" alt="Grain & Malt">
+                        <div class="card-body text-center">
+                            <h3 class="card-title fw-bold text-dark-gray">Grain & Malt</h3>
+                            <p class="card-text text-muted">มอลต์คุณภาพเยี่ยม เพื่อรสชาติที่เป็นเอกลักษณ์</p>
+                            <a href="https://craft.co.th/collections/grains-malt-barley" target="_blank" class="btn btn-sm btn-link custom-link">สำรวจ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 animate-fade-in-up" data-delay="100">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="https://placehold.co/600x400" class="card-img-top object-fit-cover" alt="Hops">
+                        <div class="card-body text-center">
+                            <h3 class="card-title fw-bold text-dark-gray">Hops</h3>
+                            <p class="card-text text-muted">ฮอปส์หลากหลายสายพันธุ์ กลิ่นหอม รสขมที่ลงตัว</p>
+                            <a href="https://craft.co.th/collections/hops" target="_blank" class="btn btn-sm btn-link custom-link">สำรวจ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 animate-fade-in-up" data-delay="200">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="https://placehold.co/600x400" class="card-img-top object-fit-cover" alt="Yeast">
+                        <div class="card-body text-center">
+                            <h3 class="card-title fw-bold text-dark-gray">Yeast</h3>
+                            <p class="card-text text-muted">ยีสต์คุณภาพสูง เพื่อการหมักที่สมบูรณ์แบบ</p>
+                            <a href="https://craft.co.th/collections/yeast" target="_blank" class="btn btn-sm btn-link custom-link">สำรวจ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 animate-fade-in-up" data-delay="300">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="https://placehold.co/600x400" class="card-img-top object-fit-cover" alt="Additives">
+                        <div class="card-body text-center">
+                            <h3 class="card-title fw-bold text-dark-gray">Additives & Adjuncts</h3>
+                            <p class="card-text text-muted">ตัวช่วยสำคัญ เพื่อคุณภาพและประสิทธิภาพสูงสุด</p>
+                            <a href="https://craft.co.th/collections/additives" target="_blank" class="btn btn-sm btn-link custom-link">สำรวจ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 animate-fade-in-up" data-delay="400">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="https://placehold.co/600x400" class="card-img-top object-fit-cover" alt="Equipment">
+                        <div class="card-body text-center">
+                            <h3 class="card-title fw-bold text-dark-gray">Equipment & Packaging</h3>
+                            <p class="card-text text-muted">อุปกรณ์และบรรจุภัณฑ์ครบวงจร</p>
+                            <a href="https://craft.co.th/collections/equipment-packaging" target="_blank" class="btn btn-sm btn-link custom-link">สำรวจ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5 animate-fade-in-up">
+                <a href="https://craft.co.th/collections/all" target="_blank" class="btn btn-outline-primary custom-outline-btn">ดูสินค้าทั้งหมด</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="py-5 bg-dark-gray text-white section-animate">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold text-white mb-5">โซลูชั่นเพื่อการสร้างสรรค์</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 animate-fade-in-up">
+                    <div class="icon-box p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-award-fill text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-mustard">คัดสรรอย่างเชี่ยวชาญ</h3>
+                        <p class="text-white-75">วัตถุดิบระดับโลก คัดเลือกอย่างพิถีพิถัน</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-fade-in-up" data-delay="100">
+                    <div class="icon-box p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-lightbulb-fill text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-mustard">เน้นงานคราฟต์</h3>
+                        <p class="text-white-75">สนับสนุนการสร้างสรรค์ นวัตกรรม และคุณภาพ</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-fade-in-up" data-delay="200">
+                    <div class="icon-box p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-life-preserver text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-mustard">พาร์ทเนอร์ที่เชื่อถือได้</h3>
+                        <p class="text-white-75">ให้มากกว่าวัตถุดิบ คือคำแนะนำและการสนับสนุน</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial mt-5 p-4 rounded-4 shadow-lg animate-fade-in-up" data-delay="300">
+                <p class="fs-5 fst-italic mb-3">"Craft Components ไม่เพียงแค่นำเสนอวัตถุดิบชั้นนำ แต่ยังเป็นพาร์ทเนอร์ที่เข้าใจและสนับสนุนการสร้างสรรค์ของเราอย่างแท้จริง!"</p>
+                <p class="fw-bold text-mustard">- โรงเบียร์คราฟต์ชั้นนำ</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="knowledge" class="py-5 bg-light-subtle section-animate">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold text-dark-gray mb-5">คลังความรู้เชิงลึก</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0 animate-fade-in-left">
+                    <img src="https://via.placeholder.com/800x600/e74c3c/fff?text=Knowledge+Hub" alt="Knowledge Hub" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6 animate-fade-in-right">
+                    <p class="lead text-muted">
+                        แหล่งรวมแรงบันดาลใจและเทคนิค ที่จะช่วยยกระดับทักษะการชงเบียร์ของคุณ
+                    </p>
+                    <ul class="list-unstyled text-start text-muted mt-4 ps-3">
+                        <li class="mb-2"><i class="bi bi-book-fill text-mustard me-2"></i> บทความเทคนิคการผลิตเบียร์</li>
+                        <li class="mb-2"><i class="bi bi-journal-check text-mustard me-2"></i> สูตรเบียร์คราฟต์</li>
+                        <li class="mb-2"><i class="bi bi-lightbulb-fill text-mustard me-2"></i> เคล็ดลับจากผู้เชี่ยวชาญ</li>
+                    </ul>
+                    <a href="https://craft.co.th/blogs/recipe-knowledges" target="_blank" class="btn btn-primary custom-btn mt-4">ดูบทความทั้งหมด</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-white section-animate">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold text-dark-gray mb-5">ร่วมสร้างสรรค์กับเรา</h2>
+            <p class="lead text-muted mb-5">เราพร้อมเป็นส่วนหนึ่งในการเดินทางสร้างสรรค์เบียร์ของคุณ ติดต่อเราได้เลย!</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 animate-fade-in-up">
+                    <div class="contact-item p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-phone-fill text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-dark-gray">โทรศัพท์</h3>
+                        <p class="text-muted"><a href="tel:[ใส่เบอร์โทรศัพท์ของคุณ]" class="text-decoration-none text-muted">[ใส่เบอร์โทรศัพท์ของคุณ]</a></p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-fade-in-up" data-delay="100">
+                    <div class="contact-item p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-envelope-fill text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-dark-gray">อีเมล</h3>
+                        <p class="text-muted"><a href="mailto:[ใส่อีเมลของคุณ]" class="text-decoration-none text-muted">[ใส่อีเมลของคุณ]</a></p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-fade-in-up" data-delay="200">
+                    <div class="contact-item p-4 rounded-4 shadow-sm h-100">
+                        <i class="bi bi-info-circle-fill text-mustard fs-1 mb-3"></i>
+                        <h3 class="fw-bold text-dark-gray">บริการลูกค้า</h3>
+                        <p class="text-muted"><a href="https://craft.co.th/pages/customer-service" target="_blank" class="text-decoration-none text-muted">การสั่งซื้อ, การชำระเงิน, การจัดส่ง</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-gray text-white py-4">
+        <div class="container text-center">
+            <p class="mb-2">&copy; 2025 Craft Components. สงวนลิขสิทธิ์.</p>
+            <div class="footer-links">
+                <a href="#about" class="text-white-75 mx-2 text-decoration-none">เกี่ยวกับ</a> |
+                <a href="#products" class="text-white-75 mx-2 text-decoration-none">วัตถุดิบ</a> |
+                <a href="#knowledge" class="text-white-75 mx-2 text-decoration-none">คลังความรู้</a> |
+                <a href="#contact" class="text-white-75 mx-2 text-decoration-none">ติดต่อ</a>
+            </div>
+            <p class="mt-2 text-white-50 small">ภาพลักษณ์: พรีเมียม, เรียบง่าย, มั่นใจ | โทนสี: เทาเข้ม, เหลืองมัสตาร์ด, แดงบอร์โดซ์, ดำด้าน</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar scroll effect
+            const navbar = document.getElementById('mainNavbar');
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 80) { // Add scrolled class after 80px scroll for more noticeable effect
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight; // Adjust for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+
+                        // Close navbar on mobile after click
+                        const navbarToggler = document.querySelector('.navbar-toggler');
+                        const navbarCollapse = document.getElementById('navbarNav');
+                        if (navbarToggler && navbarCollapse.classList.contains('show')) {
+                            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                                toggle: false
+                            });
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+
+            // Intersection Observer for section animations (fade-in on scroll)
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of the element is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-animate').forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Staggered animations for elements inside sections
+            // This targets elements with classes like `animate-fade-in-up`, `animate-fade-in-left`, `animate-fade-in-right`
+            const animateElements = document.querySelectorAll('[class*="animate-fade-in-"]');
+            const elementObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.dataset.delay) || 0; // Get delay from data-delay attribute
+                        entry.target.style.setProperty('--delay', `${delay}ms`); // Set CSS variable for animation-delay
+                        entry.target.style.animationPlayState = 'running'; // Start animation
+                        entry.target.classList.add('animated'); // Add a class to indicate it's animated
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the element is visible
+            });
+
+            animateElements.forEach(element => {
+                // Only pause if it's not already 'animated' (to prevent re-pausing if user scrolls back up)
+                if (!element.classList.contains('animated')) {
+                    element.style.animationPlayState = 'paused'; // Pause animation initially
+                }
+                elementObserver.observe(element);
+            });
+
+        });
+    </script>
+</body>
+
+</html>
